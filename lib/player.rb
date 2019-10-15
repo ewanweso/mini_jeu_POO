@@ -26,7 +26,7 @@ class Player
     end
 
 def compute_damage
-      return rand(1..6)
+      return rand(0..6)
 end
   def attacks(player2)
    player2.gets_damage
