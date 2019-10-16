@@ -1,39 +1,39 @@
-require'pry'
+
+require 'pry'
 
 class Player
-    attr_accessor :name, :life_points
+	attr_accessor :name
+	attr_accessor :life_points
 
-    def initialize(name, life_points = 10)
-      @name = name
-      @life_points = life_points
-      end
+	def initialize(name)
+		@name = name
+		@life_points = 10
+	end
 
-    def show_estate
-    puts "#{@name} a #{@life_points} points de vie"
-    end
+	def show_state
+		unless life_points > 0
+			print self.name
+			puts " est mort(e) avec #{life_points} point(s) de vie"
+		else
+			print self.name
+			puts " a #{life_points} point(s) de vie"
+		end
+	end
 
-  def gets_damage
-@life_points = 10
-    x = compute_damage
+	def gets_damage(number_of_damage)
+		@life_points = @life_points - number_of_damage
+		if @life_points <=0
+			puts "#{self.name} a été tué !"
+		end
+	end
 
-    @life_points = @life_points - x
+	def attacks(player)
+		puts "#{self.name} attaque #{player.name}"
+		number_rand_damage = compute_damage
+		player.gets_damage(number_rand_damage)
+		puts "il/elle lui inflige #{number_rand_damage} point(s) de dommages"
+	end
 
-    if @life_points <= 0
-      puts "#{@name} est mort"
-    else
-      puts "#{@name} doit faire attention"
-    end
-    end
-
-def compute_damage
-      return rand(0..6)
-end
-  def attacks(player2)
-   player2.gets_damage
-
-    puts "le joueur #{@name} attaque le joueur #{player2.name}"
-    puts "Il lui inflige #{compute_damage} de points de dommages"
-    end
-end
-
-binding.pry
+	def compute_damage
+    	return rand(1..6)
+  	end
